@@ -1,9 +1,27 @@
 import camion.*
-
+import cosas.*
 describe "group of test for camion" {
-
+  // Por otro lado, armar un test del camión, cargado con lo siguiente: bumblebee como robot,
+  //  la arena a granel con 150 kilos, la batería antiaérea con los misiles puestos, 
+  //  y el embalaje de seguridad poniéndole como contenido el paquete de ladrillos con 80 ladrillos.  
   test "first test" {
-    assert.that(true)
+    bumblebee.transformarRobot()
+    arenaGranel.peso(150)
+    bateriaAntiaerea.cargarMisiles()
+    paqueteLadrillos.armarPaqueteDeLadrillos(80)
+    embalajeSeguridad.embolver(paqueteLadrillos)
+    camion.cargar(bumblebee)
+    camion.cargar(arenaGranel)
+    camion.cargar(bateriaAntiaerea)
+    camion.cargar(embalajeSeguridad)
+    //peso = 800+ 150 + 300 +160 =2410
+    //peligrosidad = 15 + 1 + 100 + 1
+    assert.equals(2410,camion.peso())
+    assert.equals(false, camion.esPesoInpar())
+    assert.equals(true, camion.existeCosaQuePese(150))
+    assert.equals(true, camion.existeObjetoConPeligrosidad(30))
+    assert.equals([bumblebee,bateriaAntiaerea], camion.masPeligrosos(15))
+    assert.equals(false, camion.excedePesoMaximo())
+    assert.equals(false, camion.puedeCircularEnRuta(900))
   }
-
 }
